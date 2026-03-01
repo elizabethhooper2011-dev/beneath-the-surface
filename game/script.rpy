@@ -1,10 +1,11 @@
 ﻿
 define d = Character("You", color="#64c5ee")
-define e = Character("?", color="#b30000")
+define e = Character("Entity", color="#b30000")
 image bg surface = "images/bg surface.png"
 image d main = "images/d main.png"
 
 label start:
+    play music music 
 
     "You begin your scuba diving tour. The hum of the boat overhead makes the water ripple. This is going to be a normal day."
     
@@ -44,7 +45,7 @@ label start:
                                     $ location = "sunlit"
                                 "Wait":
                                     "You wait for hours."
-                                    
+                                    show boat main at truecenter with fade 
                                     
                                     "Eventually the boat gets bored and picks you up."
                                      
@@ -93,6 +94,7 @@ label start:
             
             #"As the glowing blob "
             "From your brief marine biology class, you know that this is a barbeled dragonfish." # add more info about fish
+            show d main_flip at left
             show f main at right
             
             "You also know that it has seen you."
@@ -107,6 +109,7 @@ label start:
                     $ end = True
                 "Fight":
                     if burned == True:
+                        show pipe at left
                         "Angered by the death of its mate, it charges towards you."
                         
                         "You ready your pole, prepared for its attack."
@@ -119,8 +122,10 @@ label start:
                         
                         $ end = True
                     else:
+                        show pipe at left
                         "As it draws closer, you spot a rusty metal pole laying next to some rocks."
                         
+                        show pipe at truecenter
                         "In a split second decision, you firmly grab the pole (obviously with gloves on so there is no risk of tetanus) and swing it at the head of the barbeled dragonfish."
                         
                         "It stays there, dazed for a second, before trying to attack you."
@@ -128,6 +133,8 @@ label start:
                         "Not wanting to die, you decide as a last ditch attempt to impale the dragonfish's skull."
                         
                         hide f
+                        show blood at truecenter
+                        play audio squish
                         "You slowly retreat as blood leaks from its skull, contaminating the clear water."
                         
                         "You survived... barely."
@@ -136,8 +143,10 @@ label start:
                         $ location = "midnight"
 
             if location == "midnight":
+                scene bg vents_r
+                show d main at truecenter
                 "You find yourself in the midnight zone."
-                scene bg vents
+
                 
                 "You grab a torch, and looking out across the landscape, you see a series of hydrothermal vents."
                 
@@ -212,7 +221,20 @@ label start:
                         "You hear a rumbling..."
                         
                         "Confused, you look around, realising that you are in a cave."
-                        ##rocks fall and block your exit (the whale escapes though, you just fall off (dies fron lack of oxygen)) # not finished
+
+                        "An unstable cave."
+
+                        "The cave is collapsing around you. The whale swims off, leaving you to fend for yourself."
+
+                        "As the rock structure collapses, you are buried under the rubble, suffocating as the rocks crush your body and block your exit."
+
+                        scene black
+                        
+                        "You inevitably died of lack of oxygen after all."
+
+                        "Well done, you suffocated."
+
+                        $ end= True
                     "Proceed":
                         "You ignore it, your mind still thinking about what you could have done."
                         
@@ -224,6 +246,8 @@ label start:
                         $ location = "abyss"
 
             if location == "abyss": # go over the ai sounding bit
+                scene black
+                show d main
                 "You find yourself in the abyss."
                 
                 "You are in the deepest part of the ocean. The pressure is crushing; the darkness is suffocating."
@@ -254,8 +278,6 @@ label start:
                                 menu:
                                     "Touch the pentagram":
                                         "You reach out and touch the pentagram. You feel a surge of energy coursing through your body."
-                                        
-                        define e = Character("Entity", color="#b30000")
                         show bg cthulu
                         "Standing before you is a primordial cthonic monstrosity, an eldritch being of cosmic power and horror."
                         e "You have unbound me from my chains."
@@ -266,6 +288,10 @@ label start:
                                 e "Your soul will bring me power."
                                 scene black
                                 "For eternity you feel nothing but a profound loneliness."
+                                "Was it worth it?"
+                                "You are now a slave to the entity, and you will never be free again."
+                                "You remember a time when all you wanted was to enjoy your scuba diving tour."
+                                "Those days are gone now. You are a shell of your former self, a husk of a human being, a mere vessel for the entity's power."
                                 "Well done, you sacrificed your soul to a demonic entity."
                                 $ end = True
                             "Sacrifice the world":
@@ -285,15 +311,21 @@ label start:
                                 "Well done, you fell through the earth and died."
                                 
                                 $ end = True
-                            "Sacrifice the barbeled dragonfish":
-                                e "A barbeled dragonfish? Sufficient."
-                                scene black
-                                "Even though you sacrifice the fish, you don't leave. You sleep."
-                                "And the day you open your eyes again, you see the being, drinking tea with the fish."
-                                e "More sugar?"
-                                Character("Barbeled Dragonfish", color="#ffb700") "No thank you, it's sweet enough."
-                                "Well done, you trapped yourself in the bottom of the ocean."
-                                $ end = True
+                            "Sacrifice fish":
+                                e "I require all of the fish in the ocean to slate my hunger."
+                                menu:
+                                    "Yes":
+                                        scene black
+                                        "You see the landscape shift around you."
+                                        "Schools of fish, circling in a fluid motion, orbit around the entity."
+                                        "The entity's hunger is sated, and it is pleased."
+                                        "You see a flash of blinding light."
+                                        "Through your blurred vision, you see something akin to... a fish tea party?"
+                                        e "More tea?"
+                                        Character("Fish 1", color="#ffb700") "No thank you."
+                                        Character("Fish 2", color="#ff9500") "Save some for the diver. They won't be leaving any time soon."
+                                        "Well done, you trapped yourself in the bottom of the ocean with a fish tea party.."
+                                        $ end = True
 
                     "Ignore":
                         "You ignore the cruel voice, and continue walking."
