@@ -185,7 +185,11 @@ label start:
                                 d "no, no, no, No, NO!!!"
                                 
                                 "Your body writhes in pain as burns cover your body, torturing you and stripping away all of your energy."
+
+                                # "You are in so much pain, you can't even scream."
                                 
+                                "Your burned body is launched back up to the surface."
+
                                 $ burned = True
                                 $ location = "sunlit" #might have to change this as you don't want the diver to be healed
                     "Stay":
@@ -320,6 +324,7 @@ label start:
                                         "Schools of fish, circling in a fluid motion, orbit around the entity."
                                         "The entity's hunger is sated, and it is pleased."
                                         "You see a flash of blinding light."
+                                        show tea
                                         "Through your blurred vision, you see something akin to... a fish tea party?"
                                         e "More tea?"
                                         Character("Fish 1", color="#ffb700") "No thank you."
